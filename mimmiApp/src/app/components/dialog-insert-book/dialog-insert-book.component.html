@@ -1,0 +1,37 @@
+<div class="dialog-container">
+    <form [formGroup]="formGroup">
+        <div>
+            <mat-form-field>
+                <mat-label>Autori</mat-label>
+                <input disabled matInput [value]="data.inputValue.volumeInfo.authors">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Select</mat-label>
+                <input disabled matInput [value]="data.inputValue.volumeInfo.title">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Edizione</mat-label>
+                <input formControlName="ediction" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Generi</mat-label>
+                <mat-select multiple formControlName="generes">
+                    <mat-option *ngFor="let bookGenre of global.bookGenres"
+                        [value]="bookGenre">{{bookGenre}}</mat-option>
+                </mat-select>
+                <!-- <input matInput> -->
+            </mat-form-field>
+
+        </div>
+        <div>
+            <button mat-button matDialogClose>chiudi</button>
+            <button matDialogClose mat-raised-button (click)="onSubmit()">invia</button>
+        </div>
+    </form>
+</div>

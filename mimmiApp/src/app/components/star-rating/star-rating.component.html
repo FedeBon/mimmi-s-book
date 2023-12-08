@@ -1,0 +1,5 @@
+<span class="star-rating">
+    <i class="material-icons" *ngFor="let star of stars">star</i>
+    <i class="material-icons" *ngIf="rating % 1 !== 0">star_half</i>
+    <i class="material-icons" *ngFor="let voidStar of voidStars">star_border</i>
+</span>

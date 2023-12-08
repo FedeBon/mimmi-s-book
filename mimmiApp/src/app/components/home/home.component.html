@@ -1,0 +1,60 @@
+<mat-toolbar style="background-color: #3a3e85;">
+    <div class="nav-container">
+        <div>
+            <mat-icon class="white-icon">book</mat-icon>
+            <span style="color: white">Mimmi's book</span>
+        </div>
+        <div>
+            <button mat-icon-button class="white-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="content-container">
+    <div class="search-container">
+        <form class="form" role="search" id="form">
+            <input class="input" type="search" id="query" name="q" placeholder="Cerca per titolo o autore"
+                aria-label="Search through site content">
+            <button class="button">
+                <svg class="svg" viewBox="0 0 1024 1024">
+                    <path class="path1"
+                        d="M848.471 928l-263.059-263.059c-48.941 36.706-110.118 55.059-177.412 55.059-171.294 0-312-140.706-312-312s140.706-312 312-312c171.294 0 312 140.706 312 312 0 67.294-24.471 128.471-55.059 177.412l263.059 263.059-79.529 79.529zM189.623 408.078c0 121.364 97.091 218.455 218.455 218.455s218.455-97.091 218.455-218.455c0-121.364-103.159-218.455-218.455-218.455-121.364 0-218.455 97.091-218.455 218.455z">
+                    </path>
+                </svg>
+            </button>
+        </form>
+    </div>
+
+    <div>
+        <mat-grid-list cols="2">
+            <mat-grid-tile>
+                <div class="card-container">
+                    <mat-card>
+                        <mat-card-header>
+                            <mat-card-title>Harry Potter e il calice di fuoco</mat-card-title>
+                            <mat-card-subtitle>J.W. Rowling</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <img class="image image-contain" style="margin-top: 10px;" mat-card-image
+                                src="http://books.google.com/books/content?id=4dvptppOG8MC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                                alt="Photo of a Shiba Inu">
+                            <span>
+                                Condizioni libro:
+                            </span>
+                            <br>
+                            <app-star-rating [rating]="3.5"></app-star-rating>
+                        </mat-card-content>
+                        <mat-card-actions class="cart-position">
+                            <button mat-icon-button 
+                                aria-label="Example icon-button with heart icon">
+                                <mat-icon>shopping_cart</mat-icon>
+                            </button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
+</div>

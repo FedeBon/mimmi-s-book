@@ -1,0 +1,35 @@
+<mat-toolbar style="background-color: #3a3e85;">
+    <div class="nav-container">
+        <div>
+            <mat-icon class="white-icon">book</mat-icon>
+            <span style="color: white">Mimmi's book</span>
+        </div>
+        <div>
+            <button mat-icon-button class="white-icon favorite-icon" aria-label="Example icon-button with heart icon">
+                <mat-icon>shopping_cart</mat-icon>
+            </button>
+        </div>
+    </div>
+</mat-toolbar>
+
+<div class="content-container">
+    <div class="search-container">
+        <form [formGroup]="formGroup" class="all-width">
+            <mat-form-field class="all-width">
+              <mat-label>
+                Libro da aggiungere
+              </mat-label>
+              <input (input)= "getBooksName()" [(ngModel)]="inputValue.volumeInfo.title" formControlName="libro" matInput type="text" [matAutocomplete]="auto" />
+                <button *ngIf="inputValue.volumeInfo.title" matSuffix mat-icon-button aria-label="Clear" (click)="inputValue.volumeInfo.title=''">
+                  <mat-icon>close</mat-icon>
+                </button>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let item of filteredOptions" style="width: 100%;" (click)="newForm(item)">
+                  <div style="display: flex; justify-content: space-between; width: 100%;"><div>{{item.volumeInfo.title}}</div> <div> {{item.volumeInfo.authors}}</div></div>
+                  
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+        </form>
+    </div>
+</div>
