@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { ServerBook } from '../DTO/ServerBook';
 import { GlobalVariablesService } from './global-variables.service';
@@ -11,7 +11,7 @@ import { throwError } from 'rxjs';
 export class ServiceServerService {
 
   //serverHost = "https://munchkin.free.beeceptor.com"
-  serverHost = "http://localhost:3000"
+  serverHost = "http://localhost:3001"
 
   constructor(private Http: HttpClient, public global: GlobalVariablesService) { }
 
@@ -27,4 +27,13 @@ export class ServiceServerService {
       // Handle the response
     });
    }
+   getBooks(filterName?: string) {
+    if (filterName) {
+      const options = filterName?
+        { params: new HttpParams().set('filterName', filterName) } : {};
+      return this.Http.get<ServerBook[]>(this.serverHost + "/getBooks", options)
+    } else {
+      return this.Http.get<ServerBook[]>(this.serverHost + "/getBooks")
+    }
+  }
 }

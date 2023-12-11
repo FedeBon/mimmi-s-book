@@ -29,16 +29,16 @@
 
     <div>
         <mat-grid-list cols="2">
-            <mat-grid-tile>
+            <mat-grid-tile *ngFor="let book of books">
                 <div class="card-container">
                     <mat-card>
                         <mat-card-header>
-                            <mat-card-title>Harry Potter e il calice di fuoco</mat-card-title>
-                            <mat-card-subtitle>J.W. Rowling</mat-card-subtitle>
+                            <mat-card-title>{{book.title}}</mat-card-title>
+                            <mat-card-subtitle>{{book.authors}}</mat-card-subtitle>
                         </mat-card-header>
                         <mat-card-content>
                             <img class="image image-contain" style="margin-top: 10px;" mat-card-image
-                                src="http://books.google.com/books/content?id=4dvptppOG8MC&printsec=frontcover&img=1&zoom=5&edge=curl&source=gbs_api"
+                                [src]="book.image"
                                 alt="Photo of a Shiba Inu">
                             <span>
                                 Condizioni libro:

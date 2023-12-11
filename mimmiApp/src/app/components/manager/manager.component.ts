@@ -64,7 +64,7 @@ export class ManagerComponent {
   newForm(item:any){
     this.inputValue = item
     this.matDialog.open(DialogInsertBookComponent,{
-      width:'60%',
+      width:'30%',
       data: {
         inputValue: this.inputValue,
       }
