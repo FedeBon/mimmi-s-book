@@ -1,6 +1,6 @@
 .card-container {
-  border-bottom: 5wh;
-  width: 60%;
+  margin: 5wh;
+  width: 80%;
 }
 
 .search-container {
@@ -11,13 +11,14 @@
 }
 
 .form {
-  border: 1px solid black;
+  border: 1px solid rgb(175, 165, 165);
   width: 70%;
   height: 44px;
   border-radius: 40px;
   display: flex;
   flex-direction: row;
   align-items: center;
+  background-color: white;
 }
 
 .input {
@@ -67,24 +68,65 @@
   object-fit: contain;
   object-position: center;
 }
-.cart-position{
-  justify-content: flex-end;
+
+.cart-position {
+  justify-content: space-between;
 }
 
-.white-icon{
-  color:white
+.white-icon {
+  color: white
 }
 
-.nav-container{
-width: 100%;
-display: flex;
-justify-content: space-between;
-align-items: center;
-margin-left: 6vw;
-margin-right: 6vw;
+.nav-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 6vw;
+  margin-right: 6vw;
 }
 
-.content-container{
-margin-left: 10vw;
-margin-right: 10vw;
+.nav-container-cart {
+  width: 100%;
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+
+.content-container {
+  width: 100%;
+  margin-left: 26vw;
+  margin-right: 2vw;
+}
+
+.drawer-container {
+  width: 30vw;
+}
+
+.title-card {
+  height: 20px;
+  overflow: hidden;
+}
+
+.filters-container{
+  padding-top: 4vw;
+  padding-left: 1.5vw;
+  padding-right: 1.5vw;
+  width: 20%;
+  background-color: white;
+  min-height: 100%;
+  align-items: center;
+  position: fixed;
+}
+
+.center{
+  display: flex;
+  justify-content: center;
+}
+
+
+.range-price{
+  width: 40%;
+  border: none;
+  appearance: none;
+  outline: none;
 }

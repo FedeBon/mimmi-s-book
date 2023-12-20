@@ -1,0 +1,10 @@
+<mat-card>
+    <mat-card-header style="margin: 7px 5px 12px ">
+        <mat-card-title>Cancellazione libro</mat-card-title>
+        <mat-card-subtitle style="font-size: 14px; margin-top: 12px;">Sei sicuro di voler eliminare questo elemento?</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions style="justify-content: flex-end; font-size: 5px;">
+        <button (click)="closeDialog()" mat-button style="font-size: 12px;">ANNULLA</button>
+        <button (click)="deleteBook()" mat-raised-button color="warn" style="margin-left: 1vw; font-size: 12px;">ELIMINA</button>
+    </mat-card-actions>
+</mat-card>

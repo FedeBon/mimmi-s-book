@@ -1,17 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ManagerComponent } from './manager.component';
+import { SendEmailComponent } from './send-email.component';
 
-describe('ManagerComponent', () => {
-  let component: ManagerComponent;
-  let fixture: ComponentFixture<ManagerComponent>;
-
+describe('SendEmailComponent', () => {
+  let component: SendEmailComponent;
+  let fixture: ComponentFixture<SendEmailComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ManagerComponent]
+      declarations: [SendEmailComponent]
     });
-    fixture = TestBed.createComponent(ManagerComponent);
+    fixture = TestBed.createComponent(SendEmailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

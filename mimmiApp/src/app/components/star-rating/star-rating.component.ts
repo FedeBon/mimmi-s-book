@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./star-rating.component.scss']
 })
 export class StarRatingComponent {
-  @Input() rating: number;
+  @Input() rating: number = 0;
 
   get stars() {
     return Array(Math.floor(this.rating)).fill(0);

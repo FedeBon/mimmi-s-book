@@ -9,6 +9,7 @@
 // Be sure that you only ever include this mixin once!
 @include mat.core();
 @import 'css-star-rating/scss/star-rating';
+//@import '~css-star-rating/scss/star-rating';
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
@@ -39,3 +40,6 @@ $mimmiApp-theme: mat.define-light-theme((
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.mdc-list-item__primary-text {
+  width: 100%;
+}

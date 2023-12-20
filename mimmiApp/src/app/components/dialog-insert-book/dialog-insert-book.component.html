@@ -28,10 +28,25 @@
                 <!-- <input matInput> -->
             </mat-form-field>
         </div>
-        <div></div>
+        <div>
+            <mat-form-field>
+                <mat-label>Condizione libro</mat-label>
+                <mat-select formControlName="goodCondiction">
+                    <mat-option *ngFor="let goodCondiction of global.goodCondiction"
+                        [value]="goodCondiction">{{goodCondiction}}</mat-option>
+                </mat-select>
+                <!-- <input matInput> -->
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Prezzo</mat-label>
+                <input type="number" formControlName="price" matInput>
+            </mat-form-field>
+        </div>
         <div>
             <button mat-button matDialogClose>chiudi</button>
-            <button matDialogClose mat-raised-button (click)="onSubmit()">invia</button>
+            <button matDialogClose [disabled]="!formGroup.valid" mat-raised-button (click)="onSubmit()">invia</button>
         </div>
     </form>
 </div>

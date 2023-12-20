@@ -1,0 +1,27 @@
+<div class="dialog-container">
+    <form [formGroup]="formGroup">
+        <div>
+            <mat-form-field>
+                <mat-label>Email personale</mat-label>
+                <input type="email" email formControlName="emailAddress" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Oggetto email</mat-label>
+                <input formControlName="subject" matInput>
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-form-field>
+                <mat-label>Testo</mat-label>
+                <textarea matInput formControlName="text"></textarea>
+            </mat-form-field>
+        </div>
+        <div>
+            <button mat-button matDialogClose>chiudi</button>
+            <button [disabled]="!formGroup.valid" mat-raised-button (click)="onSubmit()">invia</button>
+        </div>
+    </form>
+</div>
+<app-spinner *ngIf="spinner==true"></app-spinner>

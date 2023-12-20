@@ -1,0 +1,35 @@
+<app-manager-navbar></app-manager-navbar>
+
+<div class="card-container">
+    <mat-card class="login-card">
+        <mat-card-header style="text-align: center; font-size: 30px; width: 100%; margin-top: 1vw;">
+            <div style="width: 100%; font-weight: 400; font-size: 30px; font-family: inherit;">Login</div>
+        </mat-card-header>
+        <mat-card-content >
+            <div style="margin-top: 3vw;">
+                <form [formGroup]="formGroup">
+                    <div class="centered">
+                        <mat-form-field class="form-field">
+                            <mat-label>Nickname</mat-label>
+                            <input formControlName="nickname" matInput>
+                            <mat-error>Inserisci un nickname valido</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="centered">
+                        <mat-form-field class="form-field">
+                            <mat-label>Password</mat-label>
+                            <input type="password" formControlName="password" matInput>
+                            <mat-error>Inserisci una password valida</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-field centered">
+                        <mat-error *ngIf="loginErrorCredentials==true">Nickname o password non validi</mat-error>
+                    </div>
+                    <div class="centered" style="margin-top: 1vw; margin-bottom: 1vw;">
+                        <button style="width: 15vw;" mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="onSubmit()">invia</button>
+                    </div>
+                </form>
+            </div>
+        </mat-card-content>
+      </mat-card>
+</div>
