@@ -13,7 +13,8 @@ import { User } from '../DTO/User';
 export class ServiceServerService {
 
   //serverHost = "https://munchkin.free.beeceptor.com"
-  serverHost = "http://localhost:3001"
+  //serverHost = "http://localhost:3001"
+  serverHost = "http://bonserver.duckdns.org:3001"
 
   constructor(private Http: HttpClient, public global: GlobalVariablesService) { }
 
