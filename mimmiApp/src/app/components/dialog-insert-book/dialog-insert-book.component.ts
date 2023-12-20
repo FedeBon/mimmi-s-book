@@ -33,6 +33,8 @@ initformGroup(){
     image: new FormControl("", Validators.required),
     ediction: new FormControl("", Validators.required),
     generes: new FormControl("", Validators.required),
+    goodCondiction: new FormControl("", Validators.required),
+    price: new FormControl("", Validators.required),
   });
 
   this.formGroup.patchValue({

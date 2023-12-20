@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleBook, Item } from "../../DTO/GoggleBooks";
@@ -7,14 +7,19 @@ import { GoogleBook, Item } from "../../DTO/GoggleBooks";
 import { ServiceExternalService } from 'src/app/services/service-external.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogInsertBookComponent } from '../dialog-insert-book/dialog-insert-book.component';
+import { GlobalVariablesService } from 'src/app/services/global-variables.service';
+import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 @Component({
   selector: 'app-manager',
   templateUrl: './manager.component.html',
-  styleUrls: ['./manager.component.scss']
+  styleUrls: ['./manager.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ManagerComponent {
   title = 'autocomplete';
-
+  alwaysTrue:boolean = true
   inputValue: Item = {
     volumeInfo: {
       title: "",
@@ -24,18 +29,23 @@ export class ManagerComponent {
     }
     }
   }
-
   options: Item[];
-
   filteredOptions: any;
-
   formGroup: FormGroup;
   googleBook: GoogleBook
 
-  constructor(private external: ServiceExternalService, private fb: FormBuilder,private matDialog:MatDialog) { }
+  constructor(private snackBarService:SnackBarService, private snackBar: MatSnackBar, private route:Router, private external: ServiceExternalService, private fb: FormBuilder,private matDialog:MatDialog, public global:GlobalVariablesService) { }
 
   ngOnInit() {
+    this.check();
     this.initForm();
+  }
+
+  check(){
+    console.log(this.global.getUserInfos())
+    if (this.global.getUserInfos().length==0) {
+      this.route.navigate(['login'])
+    }
   }
 
   getBooksName() {
@@ -68,7 +78,8 @@ export class ManagerComponent {
       data: {
         inputValue: this.inputValue,
       }
+    }).afterClosed().subscribe(data=>{
+      this.snackBarService.showSuccess('Libro inserito correttamente!');
     })
   }
-
 }

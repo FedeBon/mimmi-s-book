@@ -2,15 +2,6 @@
     color:white
   }
   
-  .nav-container{
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 6vw;
-  margin-right: 6vw;
-  }
-  
   .content-container{
   margin-left: 10vw;
   margin-right: 10vw;
@@ -64,5 +55,15 @@
   }
 
   .all-width{
+    width: 100%;
+  }
+
+  .option-content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .mdc-list-item__primary-text {
     width: 100%;
   }

@@ -12,6 +12,11 @@ import { ManagerComponent } from './components/manager/manager.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogInsertBookComponent } from './components/dialog-insert-book/dialog-insert-book.component';
+import { SendEmailComponent } from './components/send-email/send-email.component';
+import { SpinnerComponent } from './components/spinner/spinner.component';
+import { LoginComponent } from './components/login/login.component';
+import { ManagerNavbarComponent } from './components/manager-navbar/manager-navbar.component';
+import { WarningPopupComponent } from './components/warning-popup/warning-popup.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +24,19 @@ import { DialogInsertBookComponent } from './components/dialog-insert-book/dialo
     HomeComponent,
     StarRatingComponent,
     ManagerComponent,
-    DialogInsertBookComponent
+    DialogInsertBookComponent,
+    SendEmailComponent,
+    SpinnerComponent,
+    LoginComponent,
+    ManagerNavbarComponent,
+    WarningPopupComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StarRatingModule,
+    StarRatingModule.forRoot(),
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule

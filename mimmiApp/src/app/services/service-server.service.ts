@@ -4,6 +4,8 @@ import { ServerBook } from '../DTO/ServerBook';
 import { GlobalVariablesService } from './global-variables.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Email } from '../DTO/Email';
+import { User } from '../DTO/User';
 
 @Injectable({
   providedIn: 'root'
@@ -27,13 +29,25 @@ export class ServiceServerService {
       // Handle the response
     });
    }
-   getBooks(filterName?: string) {
+   getBooks(filterName?: string, formGroup?:any) {
     if (filterName) {
-      const options = filterName?
-        { params: new HttpParams().set('filterName', filterName) } : {};
-      return this.Http.get<ServerBook[]>(this.serverHost + "/getBooks", options)
+      console.log("non ancora")
+      return this.Http.post<ServerBook[]>(this.serverHost + "/getBooks?filterName=" + filterName, formGroup)
     } else {
-      return this.Http.get<ServerBook[]>(this.serverHost + "/getBooks")
+      return this.Http.post<ServerBook[]>(this.serverHost + "/getBooks", formGroup)
     }
+  }
+
+  sendEmail(formData: any) {
+    return this.Http.post(this.serverHost + "/sendEmail", formData);
+  }
+
+  getUser(formData: any) {
+    return this.Http.post<User[]>(this.serverHost + "/getUser", formData);
+  }
+
+  deleteBook(id:string) {
+    console.log(id);
+    return this.Http.delete(this.serverHost + "/deleteBook?idBook=" + id).subscribe()
   }
 }
