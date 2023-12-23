@@ -17,3 +17,30 @@
 .form-field{
     width: 80%;
 }
+
+mat-card-header{
+    text-align: center;
+    font-size: 30px;
+    width: 100%;
+    margin-top: 1vw;
+}
+
+mat-card-header div{
+    width: 100%;
+    font-weight: 400;
+    font-size: 30px;
+    font-family: inherit;
+}
+
+@media (max-width: 600px) {
+
+    mat-card-header{
+        width: auto;
+    }
+
+    .login-card{
+        margin-top: 10vh;
+        width: 80%;
+    }
+
+}

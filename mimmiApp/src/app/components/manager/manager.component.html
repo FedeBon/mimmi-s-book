@@ -16,8 +16,8 @@
         <mat-autocomplete #auto="matAutocomplete">
           <mat-option *ngFor="let item of filteredOptions" (click)="newForm(item)" class="custom-mat-option">
             <div class="option-content">
-              <div>{{item.volumeInfo.title}}</div>
-              <div> {{item.volumeInfo.authors}}</div>
+              <div class="volume-title">{{item.volumeInfo.title}}</div>
+              <div class="volume-author"> {{item.volumeInfo.authors}}</div>
             </div>
           </mat-option>
         </mat-autocomplete>

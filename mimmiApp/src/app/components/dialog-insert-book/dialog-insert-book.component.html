@@ -45,7 +45,7 @@
             </mat-form-field>
         </div>
         <div>
-            <button mat-button matDialogClose>chiudi</button>
+            <button mat-button (click)="closeDialog()">chiudi</button>
             <button matDialogClose [disabled]="!formGroup.valid" mat-raised-button (click)="onSubmit()">invia</button>
         </div>
     </form>

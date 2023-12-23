@@ -1,8 +1,9 @@
 import { Component, Input, Inject } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { GlobalVariablesService } from 'src/app/services/global-variables.service';
 import { ServiceServerService } from 'src/app/services/service-server.service';
+import { ManagerComponent } from '../manager/manager.component';
 
 @Component({
   selector: 'app-dialog-insert-book',
@@ -14,7 +15,7 @@ export class DialogInsertBookComponent {
 @Input() item = 'not working';
 formGroup: FormGroup
 
-constructor(@Inject(MAT_DIALOG_DATA) public data: any, public global: GlobalVariablesService, private serverService: ServiceServerService){}
+constructor(private dialogRef: MatDialogRef<ManagerComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public global: GlobalVariablesService, private serverService: ServiceServerService){}
 
 ngOnInit(){
 
@@ -24,6 +25,10 @@ ngOnInit(){
 
 onSubmit(){
   this.serverService.sendNewBook(this.formGroup.value)
+}
+
+closeDialog(){
+  this.dialogRef.close()
 }
 
 initformGroup(){

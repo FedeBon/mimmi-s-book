@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, ViewEncapsulation } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ServerBook } from 'src/app/DTO/ServerBook';
 import { ServiceServerService } from 'src/app/services/service-server.service';
@@ -7,6 +7,7 @@ import { GlobalVariablesService } from 'src/app/services/global-variables.servic
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WarningPopupComponent } from '../warning-popup/warning-popup.component';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-home',
@@ -17,6 +18,8 @@ export class HomeComponent {
 
   starsFilter:number = 0
 
+  isThis:string = ""
+  gridCols:number = 1
   cart: ServerBook[]= []
   cartIcon: string = ""
   bookSearch : string = ""
@@ -33,12 +36,31 @@ export class HomeComponent {
 
   formGroup: FormGroup
 
-  constructor(private serviceServer:ServiceServerService, private matDialog:MatDialog, public global: GlobalVariablesService, private route: Router){}
+  constructor(private breakpointObserver: BreakpointObserver, private serviceServer:ServiceServerService, private matDialog:MatDialog, public global: GlobalVariablesService, private route: Router){}
 
   ngOnInit() {
     this.setFilterBooks();
     this.getBooks();
+    this.getWindowWidth();
+  }
 
+  getWindowWidth() {
+    const screenWidth = window.innerWidth ||
+                        document.documentElement.clientWidth ||
+                        document.body.clientWidth;
+  
+    if (screenWidth<600) {
+      this.gridCols = 1;
+      this.isThis = "phone";
+    }else{
+      this.gridCols = 3;
+      this.isThis = "pc";
+    }
+  }
+  
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.getWindowWidth();
   }
 
   setFilterBooks(){
@@ -96,8 +118,21 @@ export class HomeComponent {
   }
 
   newForm(){
+    let width: string = ""
+    switch (this.gridCols) {
+      case 1:
+        width = "100%"
+      break;
+
+      case 3:
+        width = "30%"
+      break;
+    
+      default:
+        break;
+    }
     this.matDialog.open(SendEmailComponent,{
-      width:'30%',
+      width: width,
       data: {
         cart: this.cart,
       }
@@ -117,8 +152,21 @@ export class HomeComponent {
   }
 
   deleteBook(idBook:string){
+    let width: string = ""
+    switch (this.gridCols) {
+      case 1:
+        width = "70%"
+      break;
+
+      case 3:
+        width = "30%"
+      break;
+    
+      default:
+        break;
+    }
     this.matDialog.open(WarningPopupComponent,{
-      width:'30%',
+      width: width,
       data: {
         idBook: idBook,
       }

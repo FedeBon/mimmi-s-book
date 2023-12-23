@@ -4,3 +4,10 @@
 .dialog-container{
     margin: 20px 5vh 20px 5vh;
 }
+
+@media (max-width: 600px) {
+
+    .dialog-container{
+        margin: 15px 2.5vh 12px 2.5vh;
+    }
+}

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, HostListener, Input, ViewEncapsulation } from '@angular/core';
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { GoogleBook, Item } from "../../DTO/GoggleBooks";
@@ -18,6 +18,9 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class ManagerComponent {
+
+  isThis:string = ""
+  gridCols:number = 1
   title = 'autocomplete';
   alwaysTrue:boolean = true
   inputValue: Item = {
@@ -39,10 +42,29 @@ export class ManagerComponent {
   ngOnInit() {
     this.check();
     this.initForm();
+    this.getWindowWidth();
+  }
+
+  getWindowWidth() {
+    const screenWidth = window.innerWidth ||
+                        document.documentElement.clientWidth ||
+                        document.body.clientWidth;
+  
+    if (screenWidth<600) {
+      this.gridCols = 1;
+      this.isThis = "phone";
+    }else{
+      this.gridCols = 3;
+      this.isThis = "pc";
+    }
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
+    this.getWindowWidth();
   }
 
   check(){
-    console.log(this.global.getUserInfos())
     if (this.global.getUserInfos().length==0) {
       this.route.navigate(['login'])
     }
@@ -72,14 +94,29 @@ export class ManagerComponent {
   }
 
   newForm(item:any){
+    let width: string = ""
+    switch (this.gridCols) {
+      case 1:
+        width = "100%"
+      break;
+
+      case 3:
+        width = "30%"
+      break;
+    
+      default:
+        break;
+    }
     this.inputValue = item
     this.matDialog.open(DialogInsertBookComponent,{
-      width:'30%',
+      width: width,
       data: {
         inputValue: this.inputValue,
       }
     }).afterClosed().subscribe(data=>{
-      this.snackBarService.showSuccess('Libro inserito correttamente!');
+      if (data!=undefined) {
+        this.snackBarService.showSuccess('Libro inserito correttamente!');
+      }
     })
   }
 }

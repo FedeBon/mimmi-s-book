@@ -1,8 +1,11 @@
 <mat-drawer-container class="example-container">
-    <mat-drawer position="end" #drawer mode="over">
+    <mat-drawer id="drawer" position="end" #drawer mode="over">
         <div class="drawer-container">
-            <mat-toolbar style="background-color: #3a3e85;">
+            <mat-toolbar style="background-color: var(--nav-color)">
                 <div class="nav-container-cart">
+                    <button *ngIf="isThis=='phone'" class="white-icon" (click)="drawer.toggle()" mat-icon-button>
+                        <mat-icon>arrow_forward</mat-icon>
+                    </button>
                     <div>
                         <span style="color: white">Il mio carrello</span>
                     </div>
@@ -22,9 +25,9 @@
                                     <mat-card-subtitle position="end" style="margin-bottom:10px">Costo:
                                         <b>{{book.price}}€</b></mat-card-subtitle>
                                 </div>
-                                    <button style="cursor: pointer; height: 2vw; width: 2vw; background-color: transparent; border: none;">
-                                        <mat-icon (click)="SpliceToCart(book._id)">remove_circle</mat-icon>
-                                    </button>
+                                <button class="slice-book-cart">
+                                    <mat-icon (click)="SpliceToCart(book._id)">remove_circle</mat-icon>
+                                </button>
                             </mat-card-title-group>
                         </mat-card-header>
                     </mat-card>
@@ -37,8 +40,8 @@
                 </div>
                 <mat-divider></mat-divider>
                 <mat-divider></mat-divider>
-                <div style="display: flex; justify-content: center; margin-top: 1vw;">
-                    <button mat-raised-button color="warn" style="width: 15vw;" (click)="newForm()">Invia email</button>
+                <div class="send-email-cart-button">
+                    <button mat-raised-button color="warn" (click)="newForm()">Invia email</button>
                 </div>
             </div>
             <div *ngIf="cart.length==0" style="margin: 2vw; font-size:13px">
@@ -46,8 +49,67 @@
             </div>
         </div>
     </mat-drawer>
-    <mat-drawer-content>
-        <mat-toolbar style="background-color: #3a3e85; position: fixed; height: 5vw; z-index: 1000;">
+    <mat-drawer position="start" #drawerFilter mode="over" style="width: 60%; min-height: 100vh;">
+        <mat-toolbar style="background-color: var(--nav-color)">
+            <div class="nav-container-filter">
+                <div>
+                    <span style="color: white">Filtri per i libri</span>
+                </div>
+                <button class="white-icon" (click)="drawerFilter.toggle()" mat-icon-button>
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+        </mat-toolbar>
+        <div class="drawer-container-filter">
+            <form style="width: 90%;"  [formGroup]="formGroup">
+                <div style="margin-bottom: 3vh; margin-top: 3vh;">
+                    <div style="margin-bottom: 0.7vh;">Stato del libro</div>
+                    <div (click)="updateStars(4)" style="align-items: center; cursor:pointer">
+                        <app-star-rating [rating]="4"></app-star-rating><span *ngIf="starsFilter!=4"> e
+                            più</span><span style="font-weight: 600;" *ngIf="starsFilter==4"> e più</span>
+                    </div>
+                    <div (click)="updateStars(3)" style="align-items: center; cursor:pointer">
+                        <app-star-rating [rating]="3"></app-star-rating><span *ngIf="starsFilter!=3"> e
+                            più</span><span style="font-weight: 600;" *ngIf="starsFilter==3"> e più</span>
+                    </div>
+                    <div (click)="updateStars(2)" style="align-items: center; cursor:pointer">
+                        <app-star-rating [rating]="2"></app-star-rating><span *ngIf="starsFilter!=2"> e
+                            più</span><span style="font-weight: 600;" *ngIf="starsFilter==2"> e più</span>
+                    </div>
+                    <div (click)="updateStars(1)" style="align-items: center; cursor:pointer">
+                        <app-star-rating [rating]="1"></app-star-rating><span *ngIf="starsFilter!=1"> e
+                            più</span><span style="font-weight: 600;" *ngIf="starsFilter==1"> e più</span>
+                    </div>
+                </div>
+
+                <div class="center" style="width: 100%; justify-content: space-between; margin-bottom: 5vh; ">
+                    <div
+                        style="border: solid rgb(155, 155, 155) 1px; border-radius: 5px; display: flex; height: 6vh; width: 45%;">
+                        <div class="center" style="width: 5vh; font-size: 15px; align-items: center;">EUR</div>
+                        <input (input)="getBooks()" formControlName="priceMin" style="width: 50%;font-size: 15px;"
+                            type="number" class="range-price" placeholder="min">
+                    </div>
+                    <div
+                        style="border: solid rgb(155, 155, 155) 1px; border-radius: 5px; display: flex; height: 6vh; width: 45%;">
+                        <div class="center" style="width: 5vh; font-size: 15px; align-items: center;">EUR</div>
+                        <input (input)="getBooks()" formControlName="priceMax" style="width: 50%; font-size: 11px;"
+                            type="number" class="range-price" placeholder="max">
+                    </div>
+                </div>
+                <div style="width: 100%;">
+                    <mat-form-field style="width: 100%;">
+                        <mat-label>Generi</mat-label>
+                        <mat-select multiple formControlName="genres">
+                            <mat-option (click)="getBooks()" *ngFor="let bookGenre of global.bookGenres"
+                                [value]="bookGenre">{{bookGenre}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </form>
+        </div>
+    </mat-drawer>
+    <mat-drawer-content style="min-height: 100vh;">
+        <mat-toolbar class="home-toolbar">
             <div class="nav-container">
                 <div>
                     <mat-icon class="white-icon">book</mat-icon>
@@ -65,8 +127,8 @@
                 </div>
             </div>
         </mat-toolbar>
-        <div style="display: flex; margin-top: 5vw;">
-            <div class="filters-container" cols="8">
+        <div class="body-container">
+            <div *ngIf="isThis=='pc'" class="filters-container" cols="8">
                 <form [formGroup]="formGroup">
                     <div style="margin-bottom: 2vw;">
                         <div style="margin-bottom: 0.5vw;">Stato del libro</div>
@@ -113,7 +175,13 @@
                     </div>
                 </form>
             </div>
+            <div *ngIf="isThis=='phone'" style="position: absolute; margin-top: 2vh;">
+                <button (click)="drawerFilter.toggle()" mat-icon-button>
+                        <mat-icon>filter_list</mat-icon>
+                    </button>
+            </div>
             <div class="content-container" cols="4">
+
                 <div class="search-container">
                     <form class="form" role="search" id="form">
                         <input class="input" type="search" id="query" name="q" placeholder="Cerca per titolo o autore"
@@ -128,7 +196,7 @@
                     </form>
                 </div>
                 <div>
-                    <mat-grid-list cols="3" rowHeight="2:3">
+                    <mat-grid-list [cols]="gridCols" rowHeight="2:3">
                         <mat-grid-tile *ngFor="let book of books">
                             <div class="card-container">
                                 <mat-card>

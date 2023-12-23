@@ -13,8 +13,8 @@ import { User } from '../DTO/User';
 export class ServiceServerService {
 
   //serverHost = "https://munchkin.free.beeceptor.com"
-  //serverHost = "http://localhost:3001"
-  serverHost = "https://mimmiserver.onrender.com"
+  serverHost = "http://localhost:3001"
+  //serverHost = "https://mimmiserver.onrender.com"
 
   constructor(private Http: HttpClient, public global: GlobalVariablesService) { }
 
@@ -25,10 +25,7 @@ export class ServiceServerService {
         console.error('Error:', error);
         return throwError(error);
       })
-    )
-    .subscribe(response => {
-      // Handle the response
-    });
+    );
    }
    getBooks(filterName?: string, formGroup?:any) {
     if (filterName) {
