@@ -30,7 +30,8 @@ export class SendEmailComponent {
     });
   
     this.formGroup.patchValue({
-      text: "Ciao, ti contatto per i seguenti libri: " + this.listBooks
+      text: "Ciao, ti contatto per i seguenti libri: " + this.listBooks,
+      subject: "Aquisto libri"
     });
   }
 
@@ -46,8 +47,11 @@ export class SendEmailComponent {
     this.spinner=true
     this.severService.sendEmail(this.formGroup.value).subscribe((message)=>{
       console.log(message)
-      this.dialogRef.close();
       this.spinner=false
     })
+  }
+
+  closeDialog(){
+    this.dialogRef.close();
   }
 }

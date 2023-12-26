@@ -8,6 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { WarningPopupComponent } from '../warning-popup/warning-popup.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { SnackBarService } from 'src/app/services/snack-bar.service';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,7 @@ export class HomeComponent {
 
   formGroup: FormGroup
 
-  constructor(private breakpointObserver: BreakpointObserver, private serviceServer:ServiceServerService, private matDialog:MatDialog, public global: GlobalVariablesService, private route: Router){}
+  constructor(private snackBarService:SnackBarService, private breakpointObserver: BreakpointObserver, private serviceServer:ServiceServerService, private matDialog:MatDialog, public global: GlobalVariablesService, private route: Router){}
 
   ngOnInit() {
     this.setFilterBooks();
@@ -135,6 +136,11 @@ export class HomeComponent {
       width: width,
       data: {
         cart: this.cart,
+      }
+    }).afterClosed().subscribe(data=>{
+      if (data!=undefined) {
+        this.cart = [];
+        this.snackBarService.showSuccess('Email inviata correttamente!');
       }
     })
   }
