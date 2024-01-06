@@ -76,6 +76,29 @@
   width: 15%;
 }
 
+.volume-title-broke {
+  width: 80%;
+}
+
+.volume-author-broke {
+  width: 15%;
+}
+
+#drawer{
+  width: 20%;
+}
+
+.white-icon {
+  color: white
+}
+
+.nav-container-filter{
+  width: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 @media (max-width: 600px) {
 
   .volume-title {
@@ -86,4 +109,15 @@
     width: 25%;
   }
 
+  .volume-title-broke {
+    width: 60%;
+  }
+  
+  .volume-author-broke {
+    width: 25%;
+  }
+
+  #drawer{
+    width: 60%;
+  }
 }

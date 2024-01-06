@@ -1,33 +1,58 @@
 <app-manager-navbar></app-manager-navbar>
-
-<div class="content-container">
-  <div class="search-container">
-    <form [formGroup]="formGroup" class="all-width">
-      <mat-form-field class="all-width">
-        <mat-label>
-          Libro da aggiungere
-        </mat-label>
-        <input (input)="getBooksName()" [(ngModel)]="inputValue.volumeInfo.title" formControlName="libro" matInput
-          type="text" [matAutocomplete]="auto" />
-        <button *ngIf="inputValue.volumeInfo.title" matSuffix mat-icon-button aria-label="Clear"
-          (click)="inputValue.volumeInfo.title=''">
-          <mat-icon>close</mat-icon>
+<mat-drawer-container class="example-container">
+  <mat-drawer style="position: fixed;" id="drawer" position="start" #drawer mode="over">
+    <div style="height: 100%;">
+      <mat-toolbar style="background-color: var(--nav-color)">
+        <div class="nav-container-filter">
+          <div>
+            <span style="color: white">Filtri ricerca</span>
+          </div>
+          <button (click)="drawer.toggle()" mat-icon-button>
+            <mat-icon class="white-icon">arrow_back</mat-icon>
+          </button>
+        </div>
+      </mat-toolbar>
+          <div style="width: 100%; display: flex; justify-content: center;margin-top: 15px;">
+            <mat-form-field >
+              <mat-label>Autore</mat-label>
+              <input type="text" matInput [(ngModel)]="author">
+            </mat-form-field>
+          </div>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content style="min-height: 88.5vh;">
+    <div class="content-container">
+      <div class="search-container">
+        <button style="margin-top: 5px;" (click)="drawer.toggle()" mat-icon-button>
+          <mat-icon>filter_list</mat-icon>
         </button>
-        <mat-autocomplete #auto="matAutocomplete">
-          <mat-option *ngFor="let item of filteredOptions" (click)="newForm(item)" class="custom-mat-option">
-            <div class="option-content">
-              <div class="volume-title">{{item.volumeInfo.title}}</div>
-              <div class="volume-author"> {{item.volumeInfo.authors}}</div>
-            </div>
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
-    </form>
-  </div>
-</div>
-
-
-
-
-
-
+        <form [formGroup]="formGroup" class="all-width">
+          <mat-form-field class="all-width">
+            <mat-label>
+              Libro da aggiungere
+            </mat-label>
+            <input (input)="getBooksName()" [(ngModel)]="inputValue.volumeInfo.title" formControlName="libro" matInput
+              type="text" [matAutocomplete]="auto" />
+            <button *ngIf="inputValue.volumeInfo.title" matSuffix mat-icon-button aria-label="Clear"
+              (click)="inputValue.volumeInfo.title=''">
+              <mat-icon>close</mat-icon>
+            </button>
+            <mat-autocomplete #auto="matAutocomplete">
+              <mat-option *ngFor="let item of filteredOptions" (click)="newForm(item)" class="custom-mat-option">
+                <div *ngIf="item.volumeInfo.imageLinks!=null" class="option-content">
+                  <div class="volume-title">{{item.volumeInfo.title}}</div>
+                  <div class="volume-author"> {{item.volumeInfo.authors}}</div>
+                </div>
+                <div *ngIf="item.volumeInfo.imageLinks==null" class="option-content">
+                  <div class="volume-title-broke">{{item.volumeInfo.title}}</div>
+                  <mat-icon>broken_image</mat-icon>
+                  <div class="volume-author-broke"> {{item.volumeInfo.authors}}</div>
+                </div>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>

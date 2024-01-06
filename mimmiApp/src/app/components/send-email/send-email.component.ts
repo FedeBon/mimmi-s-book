@@ -46,7 +46,6 @@ export class SendEmailComponent {
   onSubmit(){
     this.spinner=true
     this.severService.sendEmail(this.formGroup.value).subscribe((message)=>{
-      console.log(message)
       this.spinner=false
     })
   }

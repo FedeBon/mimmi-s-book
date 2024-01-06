@@ -15,10 +15,10 @@ import { SnackBarService } from 'src/app/services/snack-bar.service';
   selector: 'app-manager',
   templateUrl: './manager.component.html',
   styleUrls: ['./manager.component.scss'],
-  encapsulation: ViewEncapsulation.None,
 })
 export class ManagerComponent {
 
+  author:string=""
   isThis:string = ""
   gridCols:number = 1
   title = 'autocomplete';
@@ -71,13 +71,21 @@ export class ManagerComponent {
   }
 
   getBooksName() {
-    this.external.getBooks(this.inputValue.volumeInfo.title).subscribe(data => {
-      this.googleBook = data
-      this.options = []
-      this.googleBook.items.forEach(element => {
-        this.options.push(element)
-      });
-      this.filterData(this.inputValue)
+    let q : string = ""
+    if (this.author!="") {
+      q = "intitle:" + this.inputValue.volumeInfo.title + "+inauthor:" + this.author
+    } else {
+      q = "intitle:" + this.inputValue.volumeInfo.title
+    }
+    this.external.getBooks(q).subscribe(data => {
+      if (data.totalItems>0) {
+        this.googleBook = data
+        this.options = []
+        this.googleBook.items.forEach(element => {
+          this.options.push(element)
+        });
+        this.filterData(this.inputValue)
+      }
     })
   }
 
@@ -116,6 +124,7 @@ export class ManagerComponent {
     }).afterClosed().subscribe(data=>{
       if (data!=undefined) {
         this.snackBarService.showSuccess('Libro inserito correttamente!');
+        this.author="";
       }
     })
   }

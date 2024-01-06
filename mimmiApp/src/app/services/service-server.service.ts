@@ -20,7 +20,6 @@ export class ServiceServerService {
 
 
    sendNewBook(formData: any) {
-    console.log(formData)
      return this.Http.post<ServerBook[]>(this.serverHost + "/newBook", formData).pipe(
       catchError((error) => {
         console.error('Error:', error);
@@ -30,7 +29,6 @@ export class ServiceServerService {
    }
    getBooks(filterName?: string, formGroup?:any) {
     if (filterName) {
-      console.log("non ancora")
       return this.Http.post<ServerBook[]>(this.serverHost + "/getBooks?filterName=" + filterName, formGroup)
     } else {
       return this.Http.post<ServerBook[]>(this.serverHost + "/getBooks", formGroup)
@@ -46,7 +44,6 @@ export class ServiceServerService {
   }
 
   deleteBook(id:string) {
-    console.log(id);
     return this.Http.delete(this.serverHost + "/deleteBook?idBook=" + id).subscribe()
   }
 }

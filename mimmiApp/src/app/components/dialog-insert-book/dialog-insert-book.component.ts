@@ -35,18 +35,27 @@ initformGroup(){
   this.formGroup = new FormGroup({
     title: new FormControl("", Validators.required),
     authors: new FormControl("", Validators.required),
-    image: new FormControl("", Validators.required),
+    image: new FormControl(""),
     ediction: new FormControl("", Validators.required),
     generes: new FormControl("", Validators.required),
     goodCondiction: new FormControl("", Validators.required),
     price: new FormControl("", Validators.required),
   });
-
   this.formGroup.patchValue({
     title: this.data.inputValue.volumeInfo.title,
     authors: this.data.inputValue.volumeInfo.authors[0],
-    image: this.data.inputValue.volumeInfo.imageLinks.thumbnail,
+
   });
+  if (this.data.inputValue.volumeInfo.imageLinks.thumbnail!=null) {
+    this.formGroup.patchValue({
+      image: this.data.inputValue.volumeInfo.imageLinks.thumbnail
+    })
+  }else{
+    this.formGroup.patchValue({
+      image: ""
+    })
+  }
+  console.log(this.formGroup.value)
 }
 
 }

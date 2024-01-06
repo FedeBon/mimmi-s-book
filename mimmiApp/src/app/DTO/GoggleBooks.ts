@@ -1,5 +1,6 @@
 export class GoogleBook {
     kind: string
+    totalItems: number
     items: Item[]
 }
 
