@@ -44,7 +44,7 @@ initformGroup(){
   this.formGroup.patchValue({
     title: this.data.inputValue.volumeInfo.title,
     authors: this.data.inputValue.volumeInfo.authors[0],
-
+    goodCondiction: 4,
   });
   if (this.data.inputValue.volumeInfo.imageLinks.thumbnail!=null) {
     this.formGroup.patchValue({
